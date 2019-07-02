@@ -2,7 +2,7 @@ PODS:
   - Alamofire (4.8.2)
   - Analytics (3.6.10)
   - SvrfGLTFSceneKit (1.2.0)
-  - SvrfSDK (2.1.0):
+  - SvrfSDK (3.0.0):
     - Alamofire (~> 4.8.2)
     - Analytics (~> 3.0)
     - SvrfGLTFSceneKit (~> 1.1)
@@ -30,4 +30,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6561c4b52f921fc8536d45223a9a84e295aef818
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.7.2
