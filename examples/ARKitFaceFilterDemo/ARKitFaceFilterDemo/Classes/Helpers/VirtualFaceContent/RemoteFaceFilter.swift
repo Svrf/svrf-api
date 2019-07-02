@@ -25,19 +25,18 @@ class RemoteFaceFilter: SCNNode {
     var currentRequest: URLSessionDataTask?
     
     // faceFilter declaration
-    private var faceFilter: SCNNode?
+    var faceFilter: SvrfFaceFilter?
     
     // MTLDevice declaration
     private var device: MTLDevice?
     
-    func loadFaceFilter(media: SvrfMedia) -> Void {
+    func loadFaceFilter(media: SvrfMedia, sceneView: SCNView) -> Void {
         
         if let currentRequest = currentRequest {
             currentRequest.cancel()
         }
 
-        // Generate a face filter SCNNode from a Media
-        currentRequest = SvrfSDK.generateNode(
+        currentRequest = SvrfSDK.generateFaceFilter(
             for: media,
             onSuccess: { faceFilter in
                 // Remove any existing face filter from the SCNScene
@@ -48,10 +47,12 @@ class RemoteFaceFilter: SCNNode {
                 // Put code into main async thread
                 DispatchQueue.main.async {
                     // Add the face filter as a child node
-                    if let head = self.faceFilter {
+                    if let head = self.faceFilter?.node {
                         self.addChildNode(head)
                     }
-                    
+                    sceneView.overlaySKScene = self.faceFilter?.sceneOverlay
+                    sceneView.overlaySKScene?.size = sceneView.bounds.size
+
                     // Notify the view controller that faceFilter loaded
                     self.delegate?.faceFilterLoaded()
                 }
@@ -64,7 +65,7 @@ class RemoteFaceFilter: SCNNode {
     func resetFaceFilters() {
         
         // Unwrapping self.faceFilter
-        if let head = self.faceFilter {
+        if let head = self.faceFilter?.node {
             
             // Remove all childNodes from the self.faceFilter
             for child in head.childNodes {
@@ -73,16 +74,6 @@ class RemoteFaceFilter: SCNNode {
         }
     }
     
-    // BlendShapeAnimation
-    var blendShapes: [ARFaceAnchor.BlendShapeLocation: NSNumber] = [:] {
-        didSet {
-            
-            // Set blends shapes for face filter
-            if let faceFilter = faceFilter {
-                SvrfSDK.setBlendShapes(blendShapes: blendShapes, for: faceFilter)
-            }
-        }
-    }
 }
 
 // Extension that realises VirtualFaceContent protocol's functions
@@ -94,6 +85,6 @@ extension RemoteFaceFilter: VirtualFaceContent {
         self.device = device
         
         // Set blendshapes
-        blendShapes = faceAnchor.blendShapes
+        faceFilter?.setBlendShapes(blendShapes: faceAnchor.blendShapes)
     }
 }

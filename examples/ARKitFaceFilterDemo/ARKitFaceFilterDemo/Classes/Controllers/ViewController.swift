@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     
     // Reset button which will appear when a face filter is applied
     @IBOutlet private weak var resetButton: UIButton!
-    
+
     // This will control which Face Filter is being used
     private let contentUpdater = VirtualContentUpdater()
     
@@ -82,8 +82,7 @@ class ViewController: UIViewController {
         // Turn “Keep the screen on” off
         UIApplication.shared.isIdleTimerDisabled = false
     }
-    
-    
+
     @IBAction func resetButtonClicked(_ sender: UIButton) {
         
         // Remove any existing face filter from the SCNScene
@@ -138,7 +137,7 @@ extension ViewController: UISearchBarDelegate {
         // Hide noResultsLabel
         self.noResultsLabel.isHidden = true
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         // Show the activity indicator
@@ -175,6 +174,7 @@ extension ViewController: UISearchBarDelegate {
                 self.noResultsLabel.isHidden = false
             }
         }) { error in
+            print("Error: \(error.svrfDescription ?? "(no description)")")
             // Hide the activity indicator
             self.activityIndicator.stopAnimating()
         }
@@ -192,7 +192,7 @@ extension ViewController: SearchCollectionViewDelegate {
         activityIndicator.startAnimating()
         
         // Load Face Filter with a media
-        remoteFaceFilter.loadFaceFilter(media: media)
+        remoteFaceFilter.loadFaceFilter(media: media, sceneView: sceneView)
         
         // Hide resetButton
         resetButton.isHidden = false

@@ -6,5 +6,5 @@ target 'ARKitFaceFilterDemo' do
   use_frameworks!
 
   # Pods for ARKitFaceFilterDemo
-  pod 'SvrfSDK', '~> 2.0.0'
+  pod 'SvrfSDK', '~> 3.0.0'
 end
