@@ -23,7 +23,7 @@ Using ARKit's face detection and the SVRF API, you can apply 3D face filters to 
 Clone the repository and navigate to the example.
 
 ```bash
-git clone https://github.com/SVRF/svrf-api.git && cd ./svrf-api/examples/ARKitFaceDemo
+git clone https://github.com/SVRF/svrf-api.git && cd ./svrf-api/examples/ARKitFaceFilterDemo
 ```
 
 Install the dependencies using [CocoaPods][].
