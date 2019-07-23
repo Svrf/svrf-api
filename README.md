@@ -37,6 +37,7 @@ You can use Svrf API libraries to encapsulate endpoint requests:
 You can use the Svrf SDKs to encapsulate endpoint requests and render 3D face filters in your application.
 
 * [iOS SDK][]
+* [Unity SDK][]
 
 ## Attribution
 
@@ -69,3 +70,4 @@ The Svrf API has a generous rate limit to ensure the best experience for your us
 [Svrf User Settings]: https://www.svrf.com/user/settings
 [Swift]: https://github.com/Svrf/svrf-swift4-client
 [TOS]: https://www.svrf.com/terms
+[Unity SDK]: https://docs.svrf.com/docs/unity
