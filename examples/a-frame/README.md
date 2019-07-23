@@ -1,12 +1,12 @@
-# A-Frame 360º Image Gallery using the SVRF API
+# A-Frame 360º Image Gallery using the Svrf API
 
-![SVRF API Example A-Frame App](./assets/webvr-screen-capture.gif)
+![Svrf API Example A-Frame App](./assets/webvr-screen-capture.gif)
 
-This example uses the [SVRF API][Docs] to create a WebVR 360º image gallery using the A-Frame library. In this example, users can explore trending [SVRF.com][SVRF] experiences in WebVR.
+This example uses the [Svrf API][Docs] to create a WebVR 360º image gallery using the A-Frame library. In this example, users can explore trending [Svrf.com][Svrf] experiences in WebVR.
 
 ## About A-Frame
 
-![SVRF API Example A-Frame Inspector](./assets/aframe.jpg)
+![Svrf API Example A-Frame Inspector](./assets/aframe.jpg)
 
 [A-Frame][] is a web framework for building virtual reality experiences. With A-Frame you can quickly create WebVR applications that work on VIVE, Rift, Daydream, Gear, and desktop. Head over to the [A-Frame Docs][] to learn more.
 
@@ -19,7 +19,7 @@ This example uses the [SVRF API][Docs] to create a WebVR 360º image gallery usi
 Clone the repository and navigate to the example.
 
 ```bash
-git clone https://github.com/SVRF/svrf-api.git && cd ./svrf-api/examples/a-frame
+git clone https://github.com/Svrf/svrf-api.git && cd ./svrf-api/examples/a-frame
 ```
 
 Install the dependencies using [NPM][].
@@ -34,7 +34,7 @@ Bundle the dependencies and watch for changes with the command:
 npm start
 ```
 
-You will need to provide your SVRF API Key in [`./src/svrf.js`](./src/svrf.js), line 8. You can learn more about acquiring an API key at [developers.svrf.com][Docs].
+You will need to provide your Svrf API Key in [`./src/svrf.js`](./src/svrf.js), line 8. You can learn more about acquiring an API key at [developers.svrf.com][Docs].
 
 You view the example by opening [./index.html][Example].
 
@@ -44,4 +44,4 @@ You view the example by opening [./index.html][Example].
 [Example]: ./index.html
 [Node.js]: https://nodejs.org
 [NPM]: https://www.npmjs.com
-[SVRF]: https://www.svrf.com
+[Svrf]: https://www.svrf.com
