@@ -1,6 +1,6 @@
-# ARKit Face Filters using the SVRF API
+# ARKit Face Filters using the Svrf API
 
-This example uses the [SVRF API][Docs] to create a Face Filter iOS App using [ARKit][]. In this example, users can search for [SVRF][] Face Filters and experience them using their front-facing TrueDepth camera.
+This example uses the [Svrf API][Docs] to create a Face Filter iOS App using [ARKit][]. In this example, users can search for [Svrf][] Face Filters and experience them using their front-facing TrueDepth camera.
 
 ![ARKit Face Filter SDK Search Demo](./assets/face-filter-search-demo.jpeg) ![ARKit Face Filter SDK Demo](./assets/face-filter-demo.gif)
 
@@ -8,9 +8,9 @@ This example uses the [SVRF API][Docs] to create a Face Filter iOS App using [AR
 
 [ARKit][] on iPhone X and newer uses the front-facing TrueDepth camera to provide real-time information about the pose and expression of the user's face.
 
-## SVRF + ARKit
+## Svrf + ARKit
 
-Using ARKit's face detection and the SVRF API, you can apply 3D face filters to a user's face that react to their facial expressions in real-time. SVRF's 3D face filters are streamed to the device at runtime giving your users access to the entire SVRF library of face filters.
+Using ARKit's face detection and the Svrf API, you can apply 3D face filters to a user's face that react to their facial expressions in real-time. Svrf's 3D face filters are streamed to the device at runtime giving your users access to the entire Svrf library of face filters.
 
 ## Requirements
 
@@ -23,7 +23,7 @@ Using ARKit's face detection and the SVRF API, you can apply 3D face filters to 
 Clone the repository and navigate to the example.
 
 ```bash
-git clone https://github.com/SVRF/svrf-api.git && cd ./svrf-api/examples/ARKitFaceFilterDemo
+git clone https://github.com/Svrf/svrf-api.git && cd ./svrf-api/examples/ARKitFaceFilterDemo
 ```
 
 Install the dependencies using [CocoaPods][].
@@ -52,5 +52,5 @@ To build and test the app, connect an iPhone X or newer and run the app.
 [CocoaPods]: https://cocoapods.org/
 [Docs]: https://developers.svrf.com
 [Plist]: ./ARKitFaceFilterDemo/Plists/Info.plist
-[SVRF]: https://www.svrf.com
+[Svrf]: https://www.svrf.com
 [Xcode]: https://developer.apple.com/xcode/
