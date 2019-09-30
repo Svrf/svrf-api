@@ -5,6 +5,10 @@ using Svrf.Unity.Models;
 using UnityEngine;
 using UnityGLTF;
 
+// Analytics call is performed in a separate thread and we don't wait it.
+// Therefore the warning about not awaiting for a task is disabled.
+#pragma warning disable CS4014
+
 namespace Svrf.Unity.Utilities
 {
     internal static class SvrfModelUtility
@@ -15,35 +19,31 @@ namespace Svrf.Unity.Utilities
 
             // Do not load the model automatically: let us call .Load() method manually and await it.
             SetGltfComponentField(gltfComponent, "loadOnStart", false);
-            gltfComponent.GLTFUri = model.GetMainGltfFile();
+            gltfComponent.GLTFUri = model.Files.GltfMain;
 
             SetGltfComponentField(gltfComponent, "shaderOverride", options.ShaderOverride);
+
+            if (!Application.isEditor)
+            {
+                Task.Run(() => SegmentTracking.TrackModelRequest(model));
+            }
 
             await gltfComponent.Load();
 
             var gltfRoot = gameObject.transform.GetChild(0);
-            var occluder = FindDescendant(gltfRoot, "Occluder");
+
+            var integratedOccluder = FindDescendant(gltfRoot, "Occluder");
+            integratedOccluder?.gameObject.SetActive(false); // TODO: Remove it when we remove occluder from all models
+
+            if (options.WithOccluder)
+            {
+                var occluder = Object.Instantiate(Resources.Load<GameObject>("Occluder"));
+                occluder.transform.parent = gltfRoot;
+            }
 
             // GLTF models are right-handed, but the Unity coordinates are left-handed,
             // so rotating the model around Y axis.
             gltfRoot.transform.Rotate(Vector3.up, 180);
-
-            if (occluder == null)
-            {
-                return;
-            }
-
-            if (options.WithOccluder)
-            {
-                var meshRenderer = occluder.transform.Find("Primitive").GetComponent<SkinnedMeshRenderer>();
-                // If we need to handle occlusion, apply our custom shader to handle it.
-                meshRenderer.sharedMaterials[0].shader = Shader.Find("Svrf/Occluder");
-            }
-            else
-            {
-                // If we don't need to handle occlusion, hide the occluder.
-                occluder.gameObject.SetActive(false);
-            }
         }
 
         private static void SetGltfComponentField(GLTFComponent component, string name, object value)

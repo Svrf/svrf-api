@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using Svrf.Unity.Editor.Utilities;
+using UnityEditor;
 using UnityEngine;
 
 namespace Svrf.Unity.Editor
@@ -11,26 +12,22 @@ namespace Svrf.Unity.Editor
         [MenuItem("GameObject/Svrf/3D Model", false, 10)]
         public static void CreateSvrfModel(MenuCommand menuCommand)
         {
-            var gameObject = new GameObject("Svrf Model");
-            gameObject.AddComponent<SvrfModel>();
+            var gameObject = SvrfObjectsFactory.CreateSvrfModel();
 
-            HandleObjectCreating(gameObject, menuCommand);
+            SetParentAndAlign(gameObject, menuCommand);
         }
 
         [MenuItem("GameObject/Svrf/Api Key", false, 10)]
         public static void CreateSvrfApiKey(MenuCommand menuCommand)
         {
-            var gameObject = new GameObject("Svrf Api Key");
-            gameObject.AddComponent<SvrfApiKey>();
+            var gameObject = SvrfObjectsFactory.CreateSvrfApiKey();
 
-            HandleObjectCreating(gameObject, menuCommand);
+            SetParentAndAlign(gameObject, menuCommand);
         }
 
-        private static void HandleObjectCreating(GameObject gameObject, MenuCommand menuCommand)
+        private static void SetParentAndAlign(GameObject gameObject, MenuCommand menuCommand)
         {
-            GameObjectUtility.SetParentAndAlign(gameObject, menuCommand.context as GameObject);
-            Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);
-            Selection.activeObject = gameObject;
+            GameObjectUtility.SetParentAndAlign(gameObject, menuCommand.context as GameObject);           
         }
     }
 }

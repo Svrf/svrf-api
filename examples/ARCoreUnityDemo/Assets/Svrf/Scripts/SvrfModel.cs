@@ -13,7 +13,9 @@ namespace Svrf.Unity
         public bool WithOccluder = DefaultOptions.WithOccluder;
         public Shader ShaderOverride = DefaultOptions.ShaderOverride;
 
-        private static SvrfApi _svrf;
+        private static SvrfApi _svrfApi;
+        internal static SvrfApi SvrfApi => _svrfApi ?? (_svrfApi = new SvrfApi());
+
         private static readonly SvrfModelOptions DefaultOptions = new SvrfModelOptions
         {
             ShaderOverride = null,
@@ -22,11 +24,11 @@ namespace Svrf.Unity
 
         public bool IsLoading { get; set; } = true;
 
+        public bool IsChanged { get; set; }
+
         public async void Start()
         {
-            CreateSvrfInstance();
-
-            var model = (await _svrf.Media.GetByIdAsync(SvrfModelId)).Media;
+            var model = (await SvrfApi.Media.GetByIdAsync(SvrfModelId)).Media;
             var options = new SvrfModelOptions
             {
                 ShaderOverride = ShaderOverride,
@@ -38,6 +40,11 @@ namespace Svrf.Unity
             IsLoading = false;
         }
 
+        public void OnValidate()
+        {
+            IsChanged = true;
+        }
+
         public static async Task<GameObject> GetSvrfModelAsync(MediaModel model, SvrfModelOptions options = null, GameObject gameObject = null)
         {
             // It's impossible to use null coalescing operator with Unity objects.
@@ -47,14 +54,6 @@ namespace Svrf.Unity
             await SvrfModelUtility.AddSvrfModel(gameObject, model, options);
 
             return gameObject;
-        }
-
-        private static void CreateSvrfInstance()
-        {
-            if (_svrf == null)
-            {
-                _svrf = new SvrfApi();
-            }
         }
     }
 }
